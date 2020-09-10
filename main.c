@@ -3,7 +3,7 @@
 #include "tests.h"
 #include "square_solve.h"
 
-#define DEBUG 1
+#define DEBUG
 
 
 int main(int argC, const char* argV[]) {
@@ -20,17 +20,16 @@ int main(int argC, const char* argV[]) {
     int bIndex_ = *(argV + 2)[0] - '0';
     int cIndex_ = *(argV + 3)[0] - '0';
 
-    int solveCount = getSolvesCount(aIndex_, bIndex_, cIndex_);
-    double* solves =      solveReal(aIndex_, bIndex_, cIndex_);
+    double* solves = solveReal(aIndex_, bIndex_, cIndex_);
 
-    if (solveCount == 2) {
+    if (fabs(*solves - 2) < EPS) {
         double to_return[2];
-        to_return[0] = *solves;
-        to_return[1] = *(solves + 1);
+        to_return[0] = *(solves + 1);
+        to_return[1] = *(solves + 2);
         printf("%3f %3f", to_return[0], to_return[1]);
-    } else if (solveCount == 1) {
-        printf("%3f", *solves);
-    } else if (!solveCount) {
+    } else if (fabs(*solves - 1) < EPS) {
+        printf("%3f", *(solves + 1));
+    } else if (fabs(*solves) < EPS) {
         printf("There is no real solutions");
     }
 #endif

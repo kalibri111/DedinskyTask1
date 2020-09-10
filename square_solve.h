@@ -7,6 +7,8 @@
 
 #endif //SQUARE_EQUAL_SQUARE_SOLVE_H
 
+#define EPS 0.000001
+
 
 int getSolvesCount(int a, int b, int c);
 

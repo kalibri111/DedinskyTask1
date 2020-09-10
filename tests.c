@@ -6,6 +6,7 @@
 #include "square_solve.h"
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
 
 
 void testGetSolvesCount() {
@@ -15,16 +16,17 @@ void testGetSolvesCount() {
 }
 
 void testSolveReal() {
-    double* one_solve    = solveReal(1, 4, 4);  // 2
+    double* one_solve    = solveReal(1, 4, 4);  // -2
     double* two_solves   = solveReal(1, 3, 2);  // -1 -2
     double* zero_solves  = solveReal(5, 2, 4);  // none
 
-    assert(*one_solve - 2 < 0.001);
-    assert(*two_solves + 1 < 0.001 && *(two_solves + 1) + 2 < 0.001);
-    assert(*zero_solves == 0);
+    assert(fabs(*(one_solve + 1) + 2) < EPS);
+    assert(fabs(*(two_solves + 1) + 1) < EPS && fabs(*(two_solves + 2) + 2) < EPS);
+    assert(*zero_solves < EPS);
 }
 
 void runTests() {
     testGetSolvesCount();
     testSolveReal();
+    printf("All tests passed");
 }
